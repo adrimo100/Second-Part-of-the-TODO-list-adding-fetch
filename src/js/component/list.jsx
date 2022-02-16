@@ -9,7 +9,7 @@ const List = () => {
 	const [list, setList] = useState("");
 
 	useEffect(() => {
-		createUser();
+		//probar bloque try-catch para comprobar si exite el usuario
 		downloadData();
 	}, []);
 
@@ -53,6 +53,9 @@ const List = () => {
 			})
 			.catch((error) => {
 				console.log(error);
+				createUser();
+				console.log("usuario creado");
+				downloadData();
 			});
 	};
 
@@ -84,6 +87,9 @@ const List = () => {
 				.catch((error) => {
 					//error handling
 					console.log(error);
+					createUser();
+					console.log("usuario creado");
+					updateBackend();
 				});
 		} else {
 			fetch(url, {
@@ -112,6 +118,9 @@ const List = () => {
 				.catch((error) => {
 					//error handling
 					console.log(error);
+					createUser();
+					console.log("usuario creado");
+					updateBackend();
 				});
 		}
 	};
