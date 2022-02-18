@@ -170,7 +170,10 @@ const List = () => {
 
 		for (let i = 0; i < string.length; i++) {
 			let char = string.charCodeAt(i);
-			hash = (hash << 5) - hash + char + auxList.length;
+			hash =
+				((hash << 5) - hash + char + auxList.length) *
+					Math.floor(Math.random() * (1000 - 1)) +
+				1;
 			hash = hash & hash;
 		}
 
