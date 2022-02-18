@@ -133,7 +133,7 @@ const List = () => {
 					className="btn btn-danger float-end"
 					onClick={(e) => {
 						const newList = auxList.filter(
-							(elem) => elem.label != item.label
+							(elem) => elem.hash != item.hash
 						);
 
 						auxList = newList;
@@ -163,6 +163,20 @@ const List = () => {
 		);
 	};
 
+	const generateHash = (string) => {
+		let hash = 0;
+
+		if (string.length == 0) return hash;
+
+		for (let i = 0; i < string.length; i++) {
+			let char = string.charCodeAt(i);
+			hash = (hash << 5) - hash + char + auxList.length;
+			hash = hash & hash;
+		}
+
+		return hash;
+	};
+
 	return (
 		<div className="mt-5 d-flex justify-content-center align-items-center">
 			<div className="text-center" style={{ width: "50%" }}>
@@ -181,6 +195,7 @@ const List = () => {
 									auxList.push({
 										label: value,
 										done: false,
+										hash: generateHash(value),
 									});
 									setList(auxList);
 									setValue("");
